@@ -51,18 +51,13 @@ npm run dev
 
 ## Deploying
 
-The site is hosted on [Netlify](https://www.netlify.com) and deployed from the
-terminal with the [Netlify CLI](https://docs.netlify.com/cli/get-started/).
+The site is hosted on [Netlify](https://www.netlify.com), which is connected to
+this GitHub repository. Every push to `main` builds the site and publishes it.
 `netlify.toml` sets the build command (`npm run build`) and the publish folder
-(`dist`), so the CLI builds the site before uploading it.
+(`dist`).
 
-```bash
-netlify deploy --prod
-```
-
-Leave off `--prod` to get a draft preview URL instead. In a fresh clone, run
-`netlify login` and `netlify link` first to connect the folder to the
-`css-ink-reveal` project.
+To check a change before it goes live, open a pull request. Netlify builds a
+deploy preview for it and links the preview URL on the pull request.
 
 ## Project structure
 
