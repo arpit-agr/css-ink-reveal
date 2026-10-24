@@ -4,6 +4,8 @@ A single-page demo that reveals a painting with an animated ink-brush mask, usin
 only CSS. The page shows Henri-Edmond Cross's *Landscape* (ca. 1904) in a
 responsive five-column grid layout inspired by Karl Gerstner.
 
+**Live demo:** <https://css-ink-reveal.netlify.app>
+
 ## How the reveal works
 
 The image sits inside `.masked-img`. An `::after` pseudo-element covers it with
@@ -47,10 +49,26 @@ npm run dev
 | `npm run build`   | Build the static site into `dist/`       |
 | `npm run preview` | Serve the production build locally       |
 
+## Deploying
+
+The site is hosted on [Netlify](https://www.netlify.com) and deployed from the
+terminal with the [Netlify CLI](https://docs.netlify.com/cli/get-started/).
+`netlify.toml` sets the build command (`npm run build`) and the publish folder
+(`dist`), so the CLI builds the site before uploading it.
+
+```bash
+netlify deploy --prod
+```
+
+Leave off `--prod` to get a draft preview URL instead. In a fresh clone, run
+`netlify login` and `netlify link` first to connect the folder to the
+`css-ink-reveal` project.
+
 ## Project structure
 
 ```
 index.html              Page markup
+netlify.toml            Netlify build settings
 postcss.config.cjs      Enables postcss-custom-media
 public/assets/          Painting, ink mask sprites, background art
 src/css/
