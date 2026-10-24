@@ -1,0 +1,22 @@
+@layer utilities {
+	.wrapper {
+		margin-inline: auto;
+		max-inline-size: min(88rem, (100vw - (2 * var(--gutter, 1rem))));
+	}
+
+	.region {
+		padding-block: var(--region-space, 1rem);
+	}
+
+	.flow > * + * {
+		margin-block-start: var(--flow-space, 1em);
+	}
+
+	.stack {
+		display: flex;
+		flex-direction: column;
+		gap: var(--gutter, 1rem);
+		justify-content: var(--stack-vertical-alignment, flex-start);
+		align-items: var(--stack-horizontal-alignment, flex-start);
+	}
+}
