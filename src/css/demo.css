@@ -1,0 +1,228 @@
+@layer demo {
+	.content {
+		container-type: inline-size;
+
+		display: grid;
+		grid-template-columns: repeat(5, 1fr);
+		grid-template-rows: auto auto auto 1fr;
+		gap: var(--gutter);
+		min-block-size: 100vh;
+	}
+
+	h1 {
+		order: 1;
+		grid-column: 1/-1;
+		font-size: 20.55cqi;
+		letter-spacing: -0.025em;
+		line-height: 0.95;
+	}
+
+	h2 {
+		font-weight: 600;
+		/* font-size: inherit;
+		line-height: inherit; */
+	}
+
+	.artwork-details {
+		order: 3;
+		grid-column: 1/-1;
+
+		display: grid;
+		grid-template-columns: subgrid;
+		gap: calc(var(--gutter) - 0.5rem) var(--gutter);
+
+		> * {
+			grid-column: 1/-1;
+		}
+
+		dl {
+			align-self: start;
+
+			display: grid;
+			grid-template-columns: subgrid;
+			gap: 0 var(--gutter);
+			inline-size: 100%;
+
+			> div {
+				grid-column: 1/-1;
+				padding-block-end: 0.25rem;
+
+				display: grid;
+				grid-template-columns: subgrid;
+			}
+
+			> * + * {
+				padding-block-start: 0.25rem;
+				border-block-start: 1px solid;
+			}
+
+			dt {
+				font-weight: 600;
+				/* text-transform: uppercase; */
+			}
+
+			dd {
+				grid-column: 2/-1;
+				text-wrap-style: balance;
+			}
+		}
+	}
+
+	.desc {
+		columns: 26ch 2;
+		column-gap: var(--gutter);
+	}
+
+	.artwork {
+		order: 2;
+		position: relative;
+		grid-column: 1/-1;
+	}
+
+	.masked-img {
+		img {
+			inline-size: 100%;
+			object-fit: contain;
+		}
+	}
+
+	.credit {
+		order: 4;
+		grid-column: 1/-1;
+		align-self: end;
+		margin-block-end: var(--gutter);
+
+		display: grid;
+		grid-template-columns: subgrid;
+
+		border-block: 1px solid;
+
+		ul {
+			grid-column: 2/-1;
+			padding-inline-start: 1em;
+			/* list-style-type: "- "; */
+		}
+	}
+
+	@media (--md-n-above) {
+		.artwork-details {
+			grid-column: 1/-1;
+
+			dl {
+				grid-column: 1/3;
+				grid-template-columns: auto 1fr;
+				gap: 0 var(--gutter);
+			}
+		}
+
+		.desc {
+			grid-column: 3/-1;
+		}
+
+		.credit ul {
+			grid-column: 3/-1;
+			/* padding-inline-start: 0; */
+		}
+	}
+
+	@media (--lg-n-above) {
+		.artwork-details {
+			background-color: var(--bg-color);
+			padding-block-start: 0.25rem;
+			border-block-start: 1px solid;
+		}
+
+		/* .artwork-details dl {
+			grid-template-columns: auto 1fr;
+		} */
+
+		/* .credit ul {
+			grid-column: 3/-1;
+			column-count: 2;
+		} */
+	}
+
+	@media (--xl-n-above) {
+		.content > * {
+			order: unset;
+		}
+
+		.artwork-details {
+			grid-column: 3/-1;
+
+			dl {
+				grid-column: 1/2;
+			}
+		}
+
+		.desc {
+			grid-column: 2/-1;
+		}
+
+		.credit {
+			h2 {
+				grid-column: 3;
+			}
+
+			ul {
+				grid-column: 4/-1;
+			}
+		}
+	}
+
+	@media (--motionOK) {
+		.masked-img:after {
+			content: "";
+			position: absolute;
+			inset: 0;
+
+			background-color: var(--bg-color);
+			/* mask-image: url(/assets/ink-mask.png); */
+			mask-image: url(/assets/ink-mask-2.png);
+			mask-size: 4600% 100%;
+			animation-name: inkMask;
+			/* animation-timing-function: steps(45); */
+			animation-timing-function: steps(39);
+			animation-duration: 2s;
+			animation-fill-mode: forwards;
+
+			pointer-events: none;
+		}
+
+		/* @supports (animation-timeline: scroll()) and (animation-range: 0 100%) {
+			@media (--landscape) {
+				main {
+					view-timeline: --runner;
+				}
+
+				.artwork {
+					min-block-size: 240vh;
+				}
+
+				.masked-img {
+					position: sticky;
+					inset-block-start: var(--gutter);
+
+					img {
+						min-block-size: calc(100vh - (2 * var(--gutter)));
+					}
+
+					&:after {
+						animation-fill-mode: both;
+						animation-timeline: --runner;
+						animation-range: entry 50% exit -20%;
+					}
+				}
+			}
+		} */
+	}
+
+	@keyframes inkMask {
+		0% {
+			mask-position: 0% 50%;
+		}
+		100% {
+			mask-position: 100% 50%;
+		}
+	}
+}
